@@ -23,7 +23,7 @@ def get_test_llm():
     if os.getenv("GEMINI_API_KEY"):
         from browser_use import ChatGoogle
         return ChatGoogle(
-            model=os.getenv("GEMINI_MODEL", "gemini-2.0-flash-exp"),
+            model=os.getenv("GEMINI_MODEL", "gemini-3-flash"),
             api_key=os.getenv("GEMINI_API_KEY"),
             http_options={"base_url": os.getenv("GEMINI_BASE_URL")}
         )
