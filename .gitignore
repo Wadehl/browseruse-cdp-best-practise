@@ -52,3 +52,6 @@ uv.lock
 htmlcov/
 .coverage
 *.log
+
+# Claude
+.claude/settings.local.json
