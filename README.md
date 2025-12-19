@@ -83,7 +83,7 @@ cp .env.example .env
 # Gemini API 配置（默认）
 GEMINI_API_KEY=your_gemini_api_key
 GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta
-GEMINI_MODEL=gemini-3-flash
+GEMINI_MODEL=gemini-3-flash-preview
 ```
 
 ### 运行测试
@@ -241,7 +241,7 @@ if not _current_browser_manager:
 
 ```python
 # 全局浏览器管理器单例
-_browser_manager: Optional[SimpleBrowserManager] = None
+_current_browser_manager: Optional[SimpleBrowserManager] = None
 
 def set_browser_manager(manager: SimpleBrowserManager):
     """设置全局浏览器管理器"""

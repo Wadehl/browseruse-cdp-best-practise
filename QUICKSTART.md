@@ -66,7 +66,7 @@ browseruse-cdp-best-practise/
 ```env
 GEMINI_API_KEY=your_api_key
 GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta
-GEMINI_MODEL=gemini-3-flash
+GEMINI_MODEL=gemini-3-flash-preview
 ```
 
 ## 核心功能
