@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrowserUse 测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 50px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        #top-element {
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        #bottom-element {
+            background-color: #dc3545;
+            color: white;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            margin-top: 1500px;
+        }
+
+        .spacer {
+            height: 100px;
+            background: repeating-linear-gradient(
+                45deg,
+                #f0f0f0,
+                #f0f0f0 10px,
+                #e0e0e0 10px,
+                #e0e0e0 20px
+            );
+        }
+    </style>
+</head>
+<body>
+    <div id="top-element">
+        ✅ 顶部元素 (ID: top-element) - 页面加载时可见
+    </div>
+
+    <h1>BrowserUse 集成测试页面</h1>
+
+    <div class="section">
+        <h2>测试 1：网络数据捕获</h2>
+        <p>点击按钮将发起 API 请求，测试网络数据捕获功能。</p>
+        <button onclick="fetchUserData()">获取用户数据</button>
+        <div id="result"></div>
+    </div>
+
+    <div class="section">
+        <h2>测试 2：Tab 管理</h2>
+        <p>使用自定义工具进行多标签页管理测试。</p>
+        <ul>
+            <li><a href="https://www.python.org" target="_blank">Python官网</a></li>
+            <li><a href="https://www.javascript.com" target="_blank">JavaScript官网</a></li>
+            <li><a href="https://www.typescriptlang.org" target="_blank">TypeScript官网</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>测试 3：DOM 可见性检查</h2>
+        <p>滚动到页面底部查看底部元素。</p>
+        <button onclick="scrollToBottom()">滚动到底部</button>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div id="bottom-element">
+        ⬇️ 底部元素 (ID: bottom-element) - 需要滚动才能看到
+    </div>
+
+    <script>
+        async function fetchUserData() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<em>加载中...</em>';
+
+            try {
+                // 真实的 API 调用
+                const response = await fetch('http://localhost:8890/api/user/data');
+                const data = await response.json();
+
+                // 保存到全局变量供测试使用
+                window.apiData = data;
+
+                resultDiv.innerHTML = `
+                    <strong>JSON API 响应:</strong><br>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<strong>错误:</strong> ${error.message}`;
+            }
+        }
+
+        function scrollToBottom() {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        // 页面加载时的欢迎消息
+        console.log('BrowserUse 测试页面已加载');
+        console.log('可用测试：');
+        console.log('1. 网络数据捕获 - 点击"获取用户数据"按钮');
+        console.log('2. Tab 管理 - 使用链接或自定义工具');
+        console.log('3. DOM 可见性 - 检查顶部和底部元素');
+    </script>
+</body>
+</html>
